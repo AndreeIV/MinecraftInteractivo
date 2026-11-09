@@ -1,0 +1,23 @@
+# Entorno virtual de Python
+venv/
+.venv/
+env/
+
+# Variables de entorno con contraseñas RCON
+.env
+
+# Caché de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Archivos pesados del servidor de Minecraft / Instaladores
+CrearServidorMC/*.exe
+CrearServidorMC/*.jar
+CrearServidorMC/world/
+CrearServidorMC/world_nether/
+CrearServidorMC/world_the_end/
+CrearServidorMC/libraries/
+CrearServidorMC/logs/
+CrearServidorMC/crash-reports/
+CrearServidorMC/cache/

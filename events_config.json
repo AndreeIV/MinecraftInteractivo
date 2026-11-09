@@ -1,0 +1,88 @@
+{
+  "target_player": "@a",
+  "gifts": {
+    "Rose": {
+      "description": "Invoca un Zombie por cada Rosa enviada",
+      "scale_with_count": true,
+      "max_repeats": 25,
+      "commands": [
+        "execute at {player} run summon minecraft:zombie ~ ~ ~ {CustomName:'\"\\u00a7dZombie de {user}\"',CustomNameVisible:1b}",
+        "tellraw @a [\"\",{\"text\":\"[\\ud83c\\udf39 TikTok] \",\"color\":\"light_purple\",\"bold\":true},{\"text\":\"{user}\",\"color\":\"yellow\"},{\"text\":\" envi\\u00f3 \",\"color\":\"white\"},{\"text\":\"{count}x Rosa\",\"color\":\"red\"},{\"text\":\" -> \\u00a1Zombie invocado!\",\"color\":\"gray\"}]"
+      ]
+    },
+    "Rosa": {
+      "description": "Alias en español para el regalo Rosa",
+      "scale_with_count": true,
+      "max_repeats": 25,
+      "commands": [
+        "execute at {player} run summon minecraft:zombie ~ ~ ~ {CustomName:'\"\\u00a7dZombie de {user}\"',CustomNameVisible:1b}",
+        "tellraw @a [\"\",{\"text\":\"[\\ud83c\\udf39 TikTok] \",\"color\":\"light_purple\",\"bold\":true},{\"text\":\"{user}\",\"color\":\"yellow\"},{\"text\":\" envi\\u00f3 \",\"color\":\"white\"},{\"text\":\"{count}x Rosa\",\"color\":\"red\"},{\"text\":\" -> \\u00a1Zombie invocado!\",\"color\":\"gray\"}]"
+      ]
+    },
+    "GG": {
+      "description": "Entrega diamantes al jugador",
+      "scale_with_count": false,
+      "commands": [
+        "give {player} minecraft:diamond {count}",
+        "tellraw @a [\"\",{\"text\":\"[\\ud83d\\udc8e TikTok] \",\"color\":\"aqua\",\"bold\":true},{\"text\":\"{user}\",\"color\":\"yellow\"},{\"text\":\" envi\\u00f3 \",\"color\":\"white\"},{\"text\":\"{count}x GG\",\"color\":\"green\"},{\"text\":\" -> +{count} Diamante(s)!\",\"color\":\"aqua\"}]"
+      ]
+    },
+    "TikTok": {
+      "description": "Entrega diamantes al jugador al recibir el regalo TikTok",
+      "scale_with_count": false,
+      "commands": [
+        "give {player} minecraft:diamond {count}",
+        "tellraw @a [\"\",{\"text\":\"[\\ud83d\\udc8e TikTok] \",\"color\":\"aqua\",\"bold\":true},{\"text\":\"{user}\",\"color\":\"yellow\"},{\"text\":\" envi\\u00f3 \",\"color\":\"white\"},{\"text\":\"{count}x TikTok\",\"color\":\"light_purple\"},{\"text\":\" -> +{count} Diamante(s)!\",\"color\":\"aqua\"}]"
+      ]
+    },
+    "Doughnut": {
+      "description": "Invoca un Creeper por cada Dona enviada",
+      "scale_with_count": true,
+      "max_repeats": 10,
+      "commands": [
+        "execute at {player} run summon minecraft:creeper ~ ~ ~ {CustomName:'\"\\u00a7aCreeper de {user}\"',CustomNameVisible:1b}",
+        "tellraw @a [\"\",{\"text\":\"[\\ud83c\\udf69 TikTok] \",\"color\":\"gold\",\"bold\":true},{\"text\":\"{user}\",\"color\":\"yellow\"},{\"text\":\" envi\\u00f3 una Dona -> \\u00a1Cuidado con el Creeper!\",\"color\":\"red\"}]"
+      ]
+    }
+  },
+  "comments": {
+    "!creeper": {
+      "cooldown_seconds": 15,
+      "commands": [
+        "execute at {player} run summon minecraft:creeper ~ ~ ~ {CustomName:'\"\\u00a7c{user}\"',CustomNameVisible:1b}",
+        "tellraw @a [\"\",{\"text\":\"[\\ud83d\\udcac Chat] \",\"color\":\"green\",\"bold\":true},{\"text\":\"{user}\",\"color\":\"yellow\"},{\"text\":\" us\\u00f3 \",\"color\":\"white\"},{\"text\":\"!creeper\",\"color\":\"red\"}]"
+      ]
+    },
+    "!velocidad": {
+      "cooldown_seconds": 10,
+      "commands": [
+        "effect give {player} minecraft:speed 15 2",
+        "tellraw @a [\"\",{\"text\":\"[\\ud83d\\udcac Chat] \",\"color\":\"green\",\"bold\":true},{\"text\":\"{user}\",\"color\":\"yellow\"},{\"text\":\" activ\\u00f3 super velocidad!\",\"color\":\"aqua\"}]"
+      ]
+    },
+    "!salto": {
+      "cooldown_seconds": 10,
+      "commands": [
+        "effect give {player} minecraft:jump_boost 15 3",
+        "tellraw @a [\"\",{\"text\":\"[\\ud83d\\udcac Chat] \",\"color\":\"green\",\"bold\":true},{\"text\":\"{user}\",\"color\":\"yellow\"},{\"text\":\" activ\\u00f3 super salto!\",\"color\":\"aqua\"}]"
+      ]
+    }
+  },
+  "likes": {
+    "threshold": 5,
+    "commands": [
+      "effect give {player} minecraft:speed 10 1",
+      "execute at {player} run particle minecraft:heart ~ ~2 ~ 0.5 0.5 0.5 0.1 15",
+      "tellraw @a [\"\",{\"text\":\"[\\u2764\\ufe0f Likes] \",\"color\":\"red\",\"bold\":true},{\"text\":\"\\u00a1Llegamos a +{threshold} likes gracias a \",\"color\":\"white\"},{\"text\":\"{user}\",\"color\":\"yellow\"},{\"text\":\"! (\\u00a1Velocidad activada!)\",\"color\":\"green\"}]"
+    ]
+  },
+  "follow": {
+    "enabled": true,
+    "cooldown_seconds": 5,
+    "commands": [
+      "execute at {player} run summon minecraft:firework_rocket ~ ~1 ~ {LifeTime:20}",
+      "give {player} minecraft:golden_apple 1",
+      "tellraw @a [\"\",{\"text\":\"[\\u2b50 Nuevo Follow] \",\"color\":\"gold\",\"bold\":true},{\"text\":\"\\u00a1Gracias por seguirnos, \",\"color\":\"white\"},{\"text\":\"{user}\",\"color\":\"yellow\"},{\"text\":\"! (+1 Manzana Dorada)\",\"color\":\"gold\"}]"
+    ]
+  }
+}
