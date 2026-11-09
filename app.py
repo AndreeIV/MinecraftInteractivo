@@ -218,16 +218,19 @@ class EventMapper:
         player = os.getenv("MC_TARGET_PLAYER") or self.config.get("target_player", self.default_player)
         safe_user = self.sanitize_username(user)
 
+        replacements = {
+            "{player}": str(player),
+            "{user}": str(safe_user),
+            "{count}": str(count),
+            "{threshold}": str(threshold),
+        }
+
         formatted = []
         for cmd in raw_commands:
-            formatted.append(
-                cmd.format(
-                    player=player,
-                    user=safe_user,
-                    count=count,
-                    threshold=threshold,
-                )
-            )
+            result = cmd
+            for placeholder, value in replacements.items():
+                result = result.replace(placeholder, value)
+            formatted.append(result)
         return formatted
 
     def get_gift_commands(self, gift_name: str, gift_id: int, user: str, count: int) -> List[str]:
