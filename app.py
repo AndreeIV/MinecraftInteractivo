@@ -188,7 +188,18 @@ class EventMapper:
         self._accumulated_likes: int = 0
 
     def _load_config(self) -> Dict[str, Any]:
-        """Carga la configuración desde JSON o usa el diccionario por defecto si falla."""
+        """Carga la configuración desde events_config.py (sin escapes) o events_config.json."""
+        try:
+            import importlib
+            import events_config
+
+            importlib.reload(events_config)
+            if hasattr(events_config, "EVENTS_CONFIG"):
+                logger.info("Reglas de eventos cargadas desde 'events_config.py' (modo sin barras '\\')")
+                return events_config.EVENTS_CONFIG
+        except Exception as exc:
+            logger.warning(f"No se pudo cargar events_config.py ({exc}), intentando JSON...")
+
         if self.config_path.exists():
             try:
                 with open(self.config_path, "r", encoding="utf-8") as f:
@@ -214,14 +225,19 @@ class EventMapper:
         count: int = 1,
         threshold: int = 1,
     ) -> List[str]:
-        """Reemplaza los placeholders ({player}, {user}, {count}, {threshold}) en los comandos."""
+        """Reemplaza todos los placeholders comunes ({player}, {playername}, {user}, {nickname}, {count}, etc.)."""
         player = os.getenv("MC_TARGET_PLAYER") or self.config.get("target_player", self.default_player)
         safe_user = self.sanitize_username(user)
 
         replacements = {
             "{player}": str(player),
+            "{playername}": str(player),
             "{user}": str(safe_user),
+            "{nickname}": str(safe_user),
+            "{username}": str(safe_user),
+            "{uniqueId}": str(safe_user),
             "{count}": str(count),
+            "{repeatCount}": str(count),
             "{threshold}": str(threshold),
         }
 
@@ -366,7 +382,7 @@ class TikTokMinecraftBridge:
         @self.client.on(DisconnectEvent)
         async def on_disconnect(event: DisconnectEvent) -> None:
             logger.warning(f"Desconectado del TikTok Live de {self.username}.")
-
+        
         @self.client.on(CommentEvent)
         async def on_comment(event: CommentEvent) -> None:
             user = event.user.nickname or event.user.unique_id or "Anonimo"
